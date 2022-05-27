@@ -26,10 +26,6 @@ body {
 	border: 1px black solid;
 }
 
-#container div {
-
-}
-
 .selected-div {
 	background-color: black;
 }

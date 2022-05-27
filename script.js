@@ -35,10 +35,6 @@ function createDivs() {
 		div.setAttribute('style', `height: ${divSize}%; width: ${divSize}%;`);
 		div.setAttribute('onmousedown', 'return false')
 	});
-	// JUST ANOTHER METHOD
-	// for (let i = 0; i < newDivs.length; i++) {
-	// 	newDivs[i].setAttribute('style', `height: ${divSize}%; width: ${divSize}%;`);
-	// }
 
 	// color picker
 	function colorPicker() {
@@ -59,14 +55,6 @@ function createDivs() {
 					div.classList.add('selected-div');
 				}}
 			));
-			// JUST ANOTHER METHOD
-			// for (let i = 0; i < newDivs.length; i++) {
-			// 	let div = newDivs[i];
-			// 	div.addEventListener('mouseover', (event) => {
-			// 		if (event.type === 'mouseover' && !mouseDown) return;
-			// 		div.classList.add('selected-div');
-			// 	});
-			// }
 
 		} else if (blackColor === false) {
 			// adds event listener for mouseover and mousedown
