@@ -1,10 +1,11 @@
 * {
-	border: 1px black solid;
+	/* border: 1px black solid; */
   box-sizing: border-box;
   /* font-family: ; */
 /*	margin: 0;
 	padding: 0; */
 }
+
 *::before, *::after {
     box-sizing: inherit;
 }
@@ -18,10 +19,11 @@ body {
 #container {
 	display: flex;
 	flex-wrap: wrap;
-	height: 50vw;
-	width: 50vw;
+	height: 60vw;
+	width: 60vw;
 	max-width: 560px;
-	max-height: 526px;
+	max-height: 560px;	
+	border: 1px black solid;
 }
 
 #container div {
