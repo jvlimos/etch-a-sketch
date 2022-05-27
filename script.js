@@ -1,8 +1,7 @@
 const container = document.querySelector('#container');
 
-
 // change pad size
-let inputSize = 2;
+let inputSize = 4;
 const size = document.querySelector('#size');
 size.addEventListener('click', () => {
 	inputSize = parseInt(prompt('Enter desired number of boxes per line:', 4));
@@ -10,6 +9,11 @@ size.addEventListener('click', () => {
 	createDivs();
 	}
 );
+
+// color picker
+var blackColor = true;
+const black = document.querySelector('#black');
+const rainbow = document.querySelector('#rainbow');
 
 let divsPerLine = inputSize * inputSize;
 // function for creation of divs
@@ -36,26 +40,58 @@ function createDivs() {
 	// 	newDivs[i].setAttribute('style', `height: ${divSize}%; width: ${divSize}%;`);
 	// }
 
-	// adds event listener for mouseover and mousedown
-	[...newDivs].forEach((div) => div.addEventListener('mouseover', (event) => {
-		if (event.type === 'mouseover' && !mouseDown) return;
-		div.classList.add('selected-div');
-		}
-	));
-	// fixes first mousedown on tile not functioning
-	[...newDivs].forEach((div) => div.addEventListener('mousedown', (event) => {
-		if (event.type === 'mousedown') div.classList.add('selected-div');
-		}
-	));
-	// JUST ANOTHER METHOD
-	// for (let i = 0; i < newDivs.length; i++) {
-	// 	let div = newDivs[i];
-	// 	div.addEventListener('mouseover', (event) => {
-	// 		if (event.type === 'mouseover' && !mouseDown) return;
-	// 		div.classList.add('selected-div');
-	// 	});
-	// }
+	// color picker
+	function colorPicker() {
+		if (blackColor === true) {
+			// adds event listener for mouseover and mousedown
+			[...newDivs].forEach((div) => div.addEventListener('mouseover', (event) => {
+				if (event.type === 'mouseover' && !mouseDown) return;
+				div.removeAttribute('style');
+				div.setAttribute('style', `height: ${divSize}%; width: ${divSize}%;`);
+				div.classList.add('selected-div');
+				}
+			));
+			// fixes first mousedown on tile not functioning
+			[...newDivs].forEach((div) => div.addEventListener('mousedown', (event) => {
+				if (event.type === 'mousedown') {
+					div.removeAttribute('style');
+					div.setAttribute('style', `height: ${divSize}%; width: ${divSize}%;`);
+					div.classList.add('selected-div');
+				}}
+			));
+			// JUST ANOTHER METHOD
+			// for (let i = 0; i < newDivs.length; i++) {
+			// 	let div = newDivs[i];
+			// 	div.addEventListener('mouseover', (event) => {
+			// 		if (event.type === 'mouseover' && !mouseDown) return;
+			// 		div.classList.add('selected-div');
+			// 	});
+			// }
 
+		} else if (blackColor === false) {
+			// adds event listener for mouseover and mousedown
+			[...newDivs].forEach((div) => div.addEventListener('mouseover', (event) => {
+				if (event.type === 'mouseover' && !mouseDown) return;
+				div.setAttribute('style', `height: ${divSize}%; width: ${divSize}%; background-color: blue;`);
+			}));
+			// fixes first mousedown on tile not functioning
+			[...newDivs].forEach((div) => div.addEventListener('mousedown', (event) => {
+				if (event.type === 'mousedown') {
+					div.setAttribute('style', `height: ${divSize}%; width: ${divSize}%; background-color: blue;`);
+				}
+			}));
+		}
+	}
+	black.addEventListener('click', () => {
+		blackColor = true;
+		colorPicker();
+	});
+	rainbow.addEventListener('click', () => {
+		blackColor = false;
+		colorPicker();
+	});
+
+	colorPicker();
 }
 createDivs();
 
@@ -78,5 +114,11 @@ clear.addEventListener('click', clearPad);
 
 // clear function
 function clearPad() {
-	[...newDivs].forEach((div) => div.classList.remove('selected-div'));
+	divSize = Math.sqrt(divsPerLine) / divsPerLine * 100;
+
+	const newDivs = document.querySelectorAll('.new-div');
+	[...newDivs].forEach((div) => {
+		div.classList.remove('selected-div');	div.removeAttribute('style');
+		div.setAttribute('style', `height: ${divSize}%; width: ${divSize}%;`);
+	});
 }
